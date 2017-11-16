@@ -1,0 +1,48 @@
+/** 
+* 字典表 
+* @author Capejor
+*/
+entity Dictionary {
+/** 字典名称 */
+dictName String maxlength(64) required,
+/** 字典代码 */
+dictCode String maxlength(20) required,
+/** 开始时间 */
+startTime Instant,
+/** 结束时间 */
+endTime Instant,
+/** 序号 */
+sort Integer required, 
+/**预留字段*/
+attr1 String maxlength(200),
+attr2 String maxlength(200),
+attr3 String maxlength(200),
+attr4 String maxlength(200),
+attr5 String maxlength(200),
+attr6 Integer,
+attr7 Integer,
+attr8 Integer,
+attr9 Integer,
+attr10 Integer
+}
+
+/** 
+* 字典分类表 
+* @author Capejor
+*/
+entity DictionaryClassify {
+/** 字典代码 */
+dictCode String maxlength(20),
+/** 分类代码 */
+dictClassifyCode Integer required,
+/** 分类值 */
+dictClassifyValue String maxlength(100) required,
+/** 父分类代码 */
+parentClassifyCode Integer,
+/** 序号 */
+sort Integer required,
+/** 是否有效 */
+enable Boolean required ,
+/** 备注 */
+remark String maxlength(200)
+}
