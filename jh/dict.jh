@@ -46,3 +46,7 @@ enable Boolean required ,
 /** 备注 */
 remark String maxlength(200)
 }
+
+relationship OneToMany {
+  Dictionary{DictionaryClassify} to DictionaryClassify{Dictionary}
+}
