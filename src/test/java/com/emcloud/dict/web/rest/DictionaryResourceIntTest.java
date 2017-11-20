@@ -56,8 +56,8 @@ public class DictionaryResourceIntTest {
     private static final Instant DEFAULT_END_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_END_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Integer DEFAULT_SORT = 1;
-    private static final Integer UPDATED_SORT = 2;
+    private static final Integer DEFAULT_SEQ_NO = 1;
+    private static final Integer UPDATED_SEQ_NO = 2;
 
     private static final String DEFAULT_ATTR_1 = "AAAAAAAAAA";
     private static final String UPDATED_ATTR_1 = "BBBBBBBBBB";
@@ -137,7 +137,7 @@ public class DictionaryResourceIntTest {
             .dictCode(DEFAULT_DICT_CODE)
             .startTime(DEFAULT_START_TIME)
             .endTime(DEFAULT_END_TIME)
-            .sort(DEFAULT_SORT)
+            .seqNo(DEFAULT_SEQ_NO)
             .attr1(DEFAULT_ATTR_1)
             .attr2(DEFAULT_ATTR_2)
             .attr3(DEFAULT_ATTR_3)
@@ -176,7 +176,7 @@ public class DictionaryResourceIntTest {
         assertThat(testDictionary.getDictCode()).isEqualTo(DEFAULT_DICT_CODE);
         assertThat(testDictionary.getStartTime()).isEqualTo(DEFAULT_START_TIME);
         assertThat(testDictionary.getEndTime()).isEqualTo(DEFAULT_END_TIME);
-        assertThat(testDictionary.getSort()).isEqualTo(DEFAULT_SORT);
+        assertThat(testDictionary.getSeqNo()).isEqualTo(DEFAULT_SEQ_NO);
         assertThat(testDictionary.getAttr1()).isEqualTo(DEFAULT_ATTR_1);
         assertThat(testDictionary.getAttr2()).isEqualTo(DEFAULT_ATTR_2);
         assertThat(testDictionary.getAttr3()).isEqualTo(DEFAULT_ATTR_3);
@@ -250,10 +250,10 @@ public class DictionaryResourceIntTest {
 
     @Test
     @Transactional
-    public void checkSortIsRequired() throws Exception {
+    public void checkSeqNoIsRequired() throws Exception {
         int databaseSizeBeforeTest = dictionaryRepository.findAll().size();
         // set the field null
-        dictionary.setSort(null);
+        dictionary.setSeqNo(null);
 
         // Create the Dictionary, which fails.
 
@@ -281,7 +281,7 @@ public class DictionaryResourceIntTest {
             .andExpect(jsonPath("$.[*].dictCode").value(hasItem(DEFAULT_DICT_CODE.toString())))
             .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.toString())))
             .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.toString())))
-            .andExpect(jsonPath("$.[*].sort").value(hasItem(DEFAULT_SORT)))
+            .andExpect(jsonPath("$.[*].seqNo").value(hasItem(DEFAULT_SEQ_NO)))
             .andExpect(jsonPath("$.[*].attr1").value(hasItem(DEFAULT_ATTR_1.toString())))
             .andExpect(jsonPath("$.[*].attr2").value(hasItem(DEFAULT_ATTR_2.toString())))
             .andExpect(jsonPath("$.[*].attr3").value(hasItem(DEFAULT_ATTR_3.toString())))
@@ -309,7 +309,7 @@ public class DictionaryResourceIntTest {
             .andExpect(jsonPath("$.dictCode").value(DEFAULT_DICT_CODE.toString()))
             .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME.toString()))
             .andExpect(jsonPath("$.endTime").value(DEFAULT_END_TIME.toString()))
-            .andExpect(jsonPath("$.sort").value(DEFAULT_SORT))
+            .andExpect(jsonPath("$.seqNo").value(DEFAULT_SEQ_NO))
             .andExpect(jsonPath("$.attr1").value(DEFAULT_ATTR_1.toString()))
             .andExpect(jsonPath("$.attr2").value(DEFAULT_ATTR_2.toString()))
             .andExpect(jsonPath("$.attr3").value(DEFAULT_ATTR_3.toString()))
@@ -345,7 +345,7 @@ public class DictionaryResourceIntTest {
             .dictCode(UPDATED_DICT_CODE)
             .startTime(UPDATED_START_TIME)
             .endTime(UPDATED_END_TIME)
-            .sort(UPDATED_SORT)
+            .seqNo(UPDATED_SEQ_NO)
             .attr1(UPDATED_ATTR_1)
             .attr2(UPDATED_ATTR_2)
             .attr3(UPDATED_ATTR_3)
@@ -370,7 +370,7 @@ public class DictionaryResourceIntTest {
         assertThat(testDictionary.getDictCode()).isEqualTo(UPDATED_DICT_CODE);
         assertThat(testDictionary.getStartTime()).isEqualTo(UPDATED_START_TIME);
         assertThat(testDictionary.getEndTime()).isEqualTo(UPDATED_END_TIME);
-        assertThat(testDictionary.getSort()).isEqualTo(UPDATED_SORT);
+        assertThat(testDictionary.getSeqNo()).isEqualTo(UPDATED_SEQ_NO);
         assertThat(testDictionary.getAttr1()).isEqualTo(UPDATED_ATTR_1);
         assertThat(testDictionary.getAttr2()).isEqualTo(UPDATED_ATTR_2);
         assertThat(testDictionary.getAttr3()).isEqualTo(UPDATED_ATTR_3);
@@ -442,7 +442,7 @@ public class DictionaryResourceIntTest {
             .andExpect(jsonPath("$.[*].dictCode").value(hasItem(DEFAULT_DICT_CODE.toString())))
             .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.toString())))
             .andExpect(jsonPath("$.[*].endTime").value(hasItem(DEFAULT_END_TIME.toString())))
-            .andExpect(jsonPath("$.[*].sort").value(hasItem(DEFAULT_SORT)))
+            .andExpect(jsonPath("$.[*].seqNo").value(hasItem(DEFAULT_SEQ_NO)))
             .andExpect(jsonPath("$.[*].attr1").value(hasItem(DEFAULT_ATTR_1.toString())))
             .andExpect(jsonPath("$.[*].attr2").value(hasItem(DEFAULT_ATTR_2.toString())))
             .andExpect(jsonPath("$.[*].attr3").value(hasItem(DEFAULT_ATTR_3.toString())))

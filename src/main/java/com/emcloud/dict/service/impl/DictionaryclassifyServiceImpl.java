@@ -1,7 +1,7 @@
 package com.emcloud.dict.service.impl;
 
+import com.emcloud.dict.domain.DictionaryClassify;
 import com.emcloud.dict.service.DictionaryclassifyService;
-import com.emcloud.dict.domain.Dictionaryclassify;
 import com.emcloud.dict.repository.DictionaryclassifyRepository;
 import com.emcloud.dict.repository.search.DictionaryclassifySearchRepository;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing Dictionaryclassify.
+ * Service Implementation for managing DictionaryClassify.
  */
 @Service
 @Transactional
@@ -39,9 +39,9 @@ public class DictionaryclassifyServiceImpl implements DictionaryclassifyService{
      * @return the persisted entity
      */
     @Override
-    public Dictionaryclassify save(Dictionaryclassify dictionaryclassify) {
-        log.debug("Request to save Dictionaryclassify : {}", dictionaryclassify);
-        Dictionaryclassify result = dictionaryclassifyRepository.save(dictionaryclassify);
+    public DictionaryClassify save(DictionaryClassify dictionaryclassify) {
+        log.debug("Request to save DictionaryClassify : {}", dictionaryclassify);
+        DictionaryClassify result = dictionaryclassifyRepository.save(dictionaryclassify);
         dictionaryclassifySearchRepository.save(result);
         return result;
     }
@@ -54,7 +54,7 @@ public class DictionaryclassifyServiceImpl implements DictionaryclassifyService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<Dictionaryclassify> findAll(Pageable pageable) {
+    public Page<DictionaryClassify> findAll(Pageable pageable) {
         log.debug("Request to get all Dictionaryclassifies");
         return dictionaryclassifyRepository.findAll(pageable);
     }
@@ -67,8 +67,8 @@ public class DictionaryclassifyServiceImpl implements DictionaryclassifyService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Dictionaryclassify findOne(Long id) {
-        log.debug("Request to get Dictionaryclassify : {}", id);
+    public DictionaryClassify findOne(Long id) {
+        log.debug("Request to get DictionaryClassify : {}", id);
         return dictionaryclassifyRepository.findOne(id);
     }
 
@@ -79,7 +79,7 @@ public class DictionaryclassifyServiceImpl implements DictionaryclassifyService{
      */
     @Override
     public void delete(Long id) {
-        log.debug("Request to delete Dictionaryclassify : {}", id);
+        log.debug("Request to delete DictionaryClassify : {}", id);
         dictionaryclassifyRepository.delete(id);
         dictionaryclassifySearchRepository.delete(id);
     }
@@ -93,9 +93,9 @@ public class DictionaryclassifyServiceImpl implements DictionaryclassifyService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<Dictionaryclassify> search(String query, Pageable pageable) {
+    public Page<DictionaryClassify> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Dictionaryclassifies for query {}", query);
-        Page<Dictionaryclassify> result = dictionaryclassifySearchRepository.search(queryStringQuery(query), pageable);
+        Page<DictionaryClassify> result = dictionaryclassifySearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
 }

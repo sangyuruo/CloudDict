@@ -20,7 +20,7 @@ import java.util.Objects;
 @Table(name = "dictionary_classify")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "dictionaryclassify")
-public class Dictionaryclassify implements Serializable {
+public class DictionaryClassify implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -65,8 +65,8 @@ public class Dictionaryclassify implements Serializable {
      */
     @NotNull
     @ApiModelProperty(value = "序号", required = true)
-    @Column(name = "jhi_sort", nullable = false)
-    private Integer sort;
+    @Column(name = "seq_no", nullable = false)
+    private Integer seqNo;
 
     /**
      * 是否有效
@@ -84,6 +84,9 @@ public class Dictionaryclassify implements Serializable {
     @Column(name = "remark", length = 200)
     private String remark;
 
+    @ManyToOne
+    private Dictionary dictionary;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -97,7 +100,7 @@ public class Dictionaryclassify implements Serializable {
         return dictCode;
     }
 
-    public Dictionaryclassify dictCode(String dictCode) {
+    public DictionaryClassify dictCode(String dictCode) {
         this.dictCode = dictCode;
         return this;
     }
@@ -110,7 +113,7 @@ public class Dictionaryclassify implements Serializable {
         return dictClassifyCode;
     }
 
-    public Dictionaryclassify dictClassifyCode(Integer dictClassifyCode) {
+    public DictionaryClassify dictClassifyCode(Integer dictClassifyCode) {
         this.dictClassifyCode = dictClassifyCode;
         return this;
     }
@@ -123,7 +126,7 @@ public class Dictionaryclassify implements Serializable {
         return dictClassifyValue;
     }
 
-    public Dictionaryclassify dictClassifyValue(String dictClassifyValue) {
+    public DictionaryClassify dictClassifyValue(String dictClassifyValue) {
         this.dictClassifyValue = dictClassifyValue;
         return this;
     }
@@ -136,7 +139,7 @@ public class Dictionaryclassify implements Serializable {
         return parentClassifyCode;
     }
 
-    public Dictionaryclassify parentClassifyCode(Integer parentClassifyCode) {
+    public DictionaryClassify parentClassifyCode(Integer parentClassifyCode) {
         this.parentClassifyCode = parentClassifyCode;
         return this;
     }
@@ -145,24 +148,24 @@ public class Dictionaryclassify implements Serializable {
         this.parentClassifyCode = parentClassifyCode;
     }
 
-    public Integer getSort() {
-        return sort;
+    public Integer getSeqNo() {
+        return seqNo;
     }
 
-    public Dictionaryclassify sort(Integer sort) {
-        this.sort = sort;
+    public DictionaryClassify seqNo(Integer seqNo) {
+        this.seqNo = seqNo;
         return this;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setSeqNo(Integer seqNo) {
+        this.seqNo = seqNo;
     }
 
     public Boolean isEnable() {
         return enable;
     }
 
-    public Dictionaryclassify enable(Boolean enable) {
+    public DictionaryClassify enable(Boolean enable) {
         this.enable = enable;
         return this;
     }
@@ -175,13 +178,26 @@ public class Dictionaryclassify implements Serializable {
         return remark;
     }
 
-    public Dictionaryclassify remark(String remark) {
+    public DictionaryClassify remark(String remark) {
         this.remark = remark;
         return this;
     }
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public DictionaryClassify dictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
+        return this;
+    }
+
+    public void setDictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -193,7 +209,7 @@ public class Dictionaryclassify implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Dictionaryclassify dictionaryclassify = (Dictionaryclassify) o;
+        DictionaryClassify dictionaryclassify = (DictionaryClassify) o;
         if (dictionaryclassify.getId() == null || getId() == null) {
             return false;
         }
@@ -207,13 +223,13 @@ public class Dictionaryclassify implements Serializable {
 
     @Override
     public String toString() {
-        return "Dictionaryclassify{" +
+        return "DictionaryClassify{" +
             "id=" + getId() +
             ", dictCode='" + getDictCode() + "'" +
             ", dictClassifyCode='" + getDictClassifyCode() + "'" +
             ", dictClassifyValue='" + getDictClassifyValue() + "'" +
             ", parentClassifyCode='" + getParentClassifyCode() + "'" +
-            ", sort='" + getSort() + "'" +
+            ", seqNo='" + getSeqNo() + "'" +
             ", enable='" + isEnable() + "'" +
             ", remark='" + getRemark() + "'" +
             "}";

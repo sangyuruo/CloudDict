@@ -4,7 +4,7 @@ import com.emcloud.dict.EmCloudDictApp;
 
 import com.emcloud.dict.config.SecurityBeanOverrideConfiguration;
 
-import com.emcloud.dict.domain.Dictionaryclassify;
+import com.emcloud.dict.domain.DictionaryClassify;
 import com.emcloud.dict.repository.DictionaryclassifyRepository;
 import com.emcloud.dict.service.DictionaryclassifyService;
 import com.emcloud.dict.repository.search.DictionaryclassifySearchRepository;
@@ -54,8 +54,8 @@ public class DictionaryclassifyResourceIntTest {
     private static final Integer DEFAULT_PARENT_CLASSIFY_CODE = 1;
     private static final Integer UPDATED_PARENT_CLASSIFY_CODE = 2;
 
-    private static final Integer DEFAULT_SORT = 1;
-    private static final Integer UPDATED_SORT = 2;
+    private static final Integer DEFAULT_SEQ_NO = 1;
+    private static final Integer UPDATED_SEQ_NO = 2;
 
     private static final Boolean DEFAULT_ENABLE = false;
     private static final Boolean UPDATED_ENABLE = true;
@@ -86,7 +86,7 @@ public class DictionaryclassifyResourceIntTest {
 
     private MockMvc restDictionaryclassifyMockMvc;
 
-    private Dictionaryclassify dictionaryclassify;
+    private DictionaryClassify dictionaryclassify;
 
     @Before
     public void setup() {
@@ -105,13 +105,13 @@ public class DictionaryclassifyResourceIntTest {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static Dictionaryclassify createEntity(EntityManager em) {
-        Dictionaryclassify dictionaryclassify = new Dictionaryclassify()
+    public static DictionaryClassify createEntity(EntityManager em) {
+        DictionaryClassify dictionaryclassify = new DictionaryClassify()
             .dictCode(DEFAULT_DICT_CODE)
             .dictClassifyCode(DEFAULT_DICT_CLASSIFY_CODE)
             .dictClassifyValue(DEFAULT_DICT_CLASSIFY_VALUE)
             .parentClassifyCode(DEFAULT_PARENT_CLASSIFY_CODE)
-            .sort(DEFAULT_SORT)
+            .seqNo(DEFAULT_SEQ_NO)
             .enable(DEFAULT_ENABLE)
             .remark(DEFAULT_REMARK);
         return dictionaryclassify;
@@ -128,26 +128,26 @@ public class DictionaryclassifyResourceIntTest {
     public void createDictionaryclassify() throws Exception {
         int databaseSizeBeforeCreate = dictionaryclassifyRepository.findAll().size();
 
-        // Create the Dictionaryclassify
+        // Create the DictionaryClassify
         restDictionaryclassifyMockMvc.perform(post("/api/dictionaryclassifies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(dictionaryclassify)))
             .andExpect(status().isCreated());
 
-        // Validate the Dictionaryclassify in the database
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        // Validate the DictionaryClassify in the database
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeCreate + 1);
-        Dictionaryclassify testDictionaryclassify = dictionaryclassifyList.get(dictionaryclassifyList.size() - 1);
+        DictionaryClassify testDictionaryclassify = dictionaryclassifyList.get(dictionaryclassifyList.size() - 1);
         assertThat(testDictionaryclassify.getDictCode()).isEqualTo(DEFAULT_DICT_CODE);
         assertThat(testDictionaryclassify.getDictClassifyCode()).isEqualTo(DEFAULT_DICT_CLASSIFY_CODE);
         assertThat(testDictionaryclassify.getDictClassifyValue()).isEqualTo(DEFAULT_DICT_CLASSIFY_VALUE);
         assertThat(testDictionaryclassify.getParentClassifyCode()).isEqualTo(DEFAULT_PARENT_CLASSIFY_CODE);
-        assertThat(testDictionaryclassify.getSort()).isEqualTo(DEFAULT_SORT);
+        assertThat(testDictionaryclassify.getSeqNo()).isEqualTo(DEFAULT_SEQ_NO);
         assertThat(testDictionaryclassify.isEnable()).isEqualTo(DEFAULT_ENABLE);
         assertThat(testDictionaryclassify.getRemark()).isEqualTo(DEFAULT_REMARK);
 
-        // Validate the Dictionaryclassify in Elasticsearch
-        Dictionaryclassify dictionaryclassifyEs = dictionaryclassifySearchRepository.findOne(testDictionaryclassify.getId());
+        // Validate the DictionaryClassify in Elasticsearch
+        DictionaryClassify dictionaryclassifyEs = dictionaryclassifySearchRepository.findOne(testDictionaryclassify.getId());
         assertThat(dictionaryclassifyEs).isEqualToComparingFieldByField(testDictionaryclassify);
     }
 
@@ -156,7 +156,7 @@ public class DictionaryclassifyResourceIntTest {
     public void createDictionaryclassifyWithExistingId() throws Exception {
         int databaseSizeBeforeCreate = dictionaryclassifyRepository.findAll().size();
 
-        // Create the Dictionaryclassify with an existing ID
+        // Create the DictionaryClassify with an existing ID
         dictionaryclassify.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
@@ -165,8 +165,8 @@ public class DictionaryclassifyResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(dictionaryclassify)))
             .andExpect(status().isBadRequest());
 
-        // Validate the Dictionaryclassify in the database
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        // Validate the DictionaryClassify in the database
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeCreate);
     }
 
@@ -177,14 +177,14 @@ public class DictionaryclassifyResourceIntTest {
         // set the field null
         dictionaryclassify.setDictClassifyCode(null);
 
-        // Create the Dictionaryclassify, which fails.
+        // Create the DictionaryClassify, which fails.
 
         restDictionaryclassifyMockMvc.perform(post("/api/dictionaryclassifies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(dictionaryclassify)))
             .andExpect(status().isBadRequest());
 
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeTest);
     }
 
@@ -195,32 +195,32 @@ public class DictionaryclassifyResourceIntTest {
         // set the field null
         dictionaryclassify.setDictClassifyValue(null);
 
-        // Create the Dictionaryclassify, which fails.
+        // Create the DictionaryClassify, which fails.
 
         restDictionaryclassifyMockMvc.perform(post("/api/dictionaryclassifies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(dictionaryclassify)))
             .andExpect(status().isBadRequest());
 
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
     @Transactional
-    public void checkSortIsRequired() throws Exception {
+    public void checkSeqNoIsRequired() throws Exception {
         int databaseSizeBeforeTest = dictionaryclassifyRepository.findAll().size();
         // set the field null
-        dictionaryclassify.setSort(null);
+        dictionaryclassify.setSeqNo(null);
 
-        // Create the Dictionaryclassify, which fails.
+        // Create the DictionaryClassify, which fails.
 
         restDictionaryclassifyMockMvc.perform(post("/api/dictionaryclassifies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(dictionaryclassify)))
             .andExpect(status().isBadRequest());
 
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeTest);
     }
 
@@ -231,14 +231,14 @@ public class DictionaryclassifyResourceIntTest {
         // set the field null
         dictionaryclassify.setEnable(null);
 
-        // Create the Dictionaryclassify, which fails.
+        // Create the DictionaryClassify, which fails.
 
         restDictionaryclassifyMockMvc.perform(post("/api/dictionaryclassifies")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(dictionaryclassify)))
             .andExpect(status().isBadRequest());
 
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeTest);
     }
 
@@ -257,7 +257,7 @@ public class DictionaryclassifyResourceIntTest {
             .andExpect(jsonPath("$.[*].dictClassifyCode").value(hasItem(DEFAULT_DICT_CLASSIFY_CODE)))
             .andExpect(jsonPath("$.[*].dictClassifyValue").value(hasItem(DEFAULT_DICT_CLASSIFY_VALUE.toString())))
             .andExpect(jsonPath("$.[*].parentClassifyCode").value(hasItem(DEFAULT_PARENT_CLASSIFY_CODE)))
-            .andExpect(jsonPath("$.[*].sort").value(hasItem(DEFAULT_SORT)))
+            .andExpect(jsonPath("$.[*].seqNo").value(hasItem(DEFAULT_SEQ_NO)))
             .andExpect(jsonPath("$.[*].enable").value(hasItem(DEFAULT_ENABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
     }
@@ -277,7 +277,7 @@ public class DictionaryclassifyResourceIntTest {
             .andExpect(jsonPath("$.dictClassifyCode").value(DEFAULT_DICT_CLASSIFY_CODE))
             .andExpect(jsonPath("$.dictClassifyValue").value(DEFAULT_DICT_CLASSIFY_VALUE.toString()))
             .andExpect(jsonPath("$.parentClassifyCode").value(DEFAULT_PARENT_CLASSIFY_CODE))
-            .andExpect(jsonPath("$.sort").value(DEFAULT_SORT))
+            .andExpect(jsonPath("$.seqNo").value(DEFAULT_SEQ_NO))
             .andExpect(jsonPath("$.enable").value(DEFAULT_ENABLE.booleanValue()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK.toString()));
     }
@@ -299,13 +299,13 @@ public class DictionaryclassifyResourceIntTest {
         int databaseSizeBeforeUpdate = dictionaryclassifyRepository.findAll().size();
 
         // Update the dictionaryclassify
-        Dictionaryclassify updatedDictionaryclassify = dictionaryclassifyRepository.findOne(dictionaryclassify.getId());
+        DictionaryClassify updatedDictionaryclassify = dictionaryclassifyRepository.findOne(dictionaryclassify.getId());
         updatedDictionaryclassify
             .dictCode(UPDATED_DICT_CODE)
             .dictClassifyCode(UPDATED_DICT_CLASSIFY_CODE)
             .dictClassifyValue(UPDATED_DICT_CLASSIFY_VALUE)
             .parentClassifyCode(UPDATED_PARENT_CLASSIFY_CODE)
-            .sort(UPDATED_SORT)
+            .seqNo(UPDATED_SEQ_NO)
             .enable(UPDATED_ENABLE)
             .remark(UPDATED_REMARK);
 
@@ -314,20 +314,20 @@ public class DictionaryclassifyResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(updatedDictionaryclassify)))
             .andExpect(status().isOk());
 
-        // Validate the Dictionaryclassify in the database
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        // Validate the DictionaryClassify in the database
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeUpdate);
-        Dictionaryclassify testDictionaryclassify = dictionaryclassifyList.get(dictionaryclassifyList.size() - 1);
+        DictionaryClassify testDictionaryclassify = dictionaryclassifyList.get(dictionaryclassifyList.size() - 1);
         assertThat(testDictionaryclassify.getDictCode()).isEqualTo(UPDATED_DICT_CODE);
         assertThat(testDictionaryclassify.getDictClassifyCode()).isEqualTo(UPDATED_DICT_CLASSIFY_CODE);
         assertThat(testDictionaryclassify.getDictClassifyValue()).isEqualTo(UPDATED_DICT_CLASSIFY_VALUE);
         assertThat(testDictionaryclassify.getParentClassifyCode()).isEqualTo(UPDATED_PARENT_CLASSIFY_CODE);
-        assertThat(testDictionaryclassify.getSort()).isEqualTo(UPDATED_SORT);
+        assertThat(testDictionaryclassify.getSeqNo()).isEqualTo(UPDATED_SEQ_NO);
         assertThat(testDictionaryclassify.isEnable()).isEqualTo(UPDATED_ENABLE);
         assertThat(testDictionaryclassify.getRemark()).isEqualTo(UPDATED_REMARK);
 
-        // Validate the Dictionaryclassify in Elasticsearch
-        Dictionaryclassify dictionaryclassifyEs = dictionaryclassifySearchRepository.findOne(testDictionaryclassify.getId());
+        // Validate the DictionaryClassify in Elasticsearch
+        DictionaryClassify dictionaryclassifyEs = dictionaryclassifySearchRepository.findOne(testDictionaryclassify.getId());
         assertThat(dictionaryclassifyEs).isEqualToComparingFieldByField(testDictionaryclassify);
     }
 
@@ -336,7 +336,7 @@ public class DictionaryclassifyResourceIntTest {
     public void updateNonExistingDictionaryclassify() throws Exception {
         int databaseSizeBeforeUpdate = dictionaryclassifyRepository.findAll().size();
 
-        // Create the Dictionaryclassify
+        // Create the DictionaryClassify
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restDictionaryclassifyMockMvc.perform(put("/api/dictionaryclassifies")
@@ -344,8 +344,8 @@ public class DictionaryclassifyResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(dictionaryclassify)))
             .andExpect(status().isCreated());
 
-        // Validate the Dictionaryclassify in the database
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        // Validate the DictionaryClassify in the database
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeUpdate + 1);
     }
 
@@ -367,7 +367,7 @@ public class DictionaryclassifyResourceIntTest {
         assertThat(dictionaryclassifyExistsInEs).isFalse();
 
         // Validate the database is empty
-        List<Dictionaryclassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
+        List<DictionaryClassify> dictionaryclassifyList = dictionaryclassifyRepository.findAll();
         assertThat(dictionaryclassifyList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
@@ -386,7 +386,7 @@ public class DictionaryclassifyResourceIntTest {
             .andExpect(jsonPath("$.[*].dictClassifyCode").value(hasItem(DEFAULT_DICT_CLASSIFY_CODE)))
             .andExpect(jsonPath("$.[*].dictClassifyValue").value(hasItem(DEFAULT_DICT_CLASSIFY_VALUE.toString())))
             .andExpect(jsonPath("$.[*].parentClassifyCode").value(hasItem(DEFAULT_PARENT_CLASSIFY_CODE)))
-            .andExpect(jsonPath("$.[*].sort").value(hasItem(DEFAULT_SORT)))
+            .andExpect(jsonPath("$.[*].seqNo").value(hasItem(DEFAULT_SEQ_NO)))
             .andExpect(jsonPath("$.[*].enable").value(hasItem(DEFAULT_ENABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
     }
@@ -394,10 +394,10 @@ public class DictionaryclassifyResourceIntTest {
     @Test
     @Transactional
     public void equalsVerifier() throws Exception {
-        TestUtil.equalsVerifier(Dictionaryclassify.class);
-        Dictionaryclassify dictionaryclassify1 = new Dictionaryclassify();
+        TestUtil.equalsVerifier(DictionaryClassify.class);
+        DictionaryClassify dictionaryclassify1 = new DictionaryClassify();
         dictionaryclassify1.setId(1L);
-        Dictionaryclassify dictionaryclassify2 = new Dictionaryclassify();
+        DictionaryClassify dictionaryclassify2 = new DictionaryClassify();
         dictionaryclassify2.setId(dictionaryclassify1.getId());
         assertThat(dictionaryclassify1).isEqualTo(dictionaryclassify2);
         dictionaryclassify2.setId(2L);

@@ -15,9 +15,9 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity Dictionaryclassify.
+        Added the entity DictionaryClassify.
     -->
-    <changeSet id="20171116010852-1" author="jhipster">
+    <changeSet id="20171116082515-1" author="jhipster">
         <createTable tableName="dictionary_classify">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -38,7 +38,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="jhi_sort" type="integer">
+            <column name="seq_no" type="integer">
                 <constraints nullable="false" />
             </column>
 
@@ -50,9 +50,13 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="dictionary_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

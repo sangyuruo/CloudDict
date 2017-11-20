@@ -80,7 +80,7 @@ class DictionaryGatlingTest extends Simulation {
             .exec(http("Create new dictionary")
             .post("/emclouddict/api/dictionaries")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "dictName":"SAMPLE_TEXT", "dictCode":"SAMPLE_TEXT", "startTime":"2020-01-01T00:00:00.000Z", "endTime":"2020-01-01T00:00:00.000Z", "sort":"0", "attr1":"SAMPLE_TEXT", "attr2":"SAMPLE_TEXT", "attr3":"SAMPLE_TEXT", "attr4":"SAMPLE_TEXT", "attr5":"SAMPLE_TEXT", "attr6":"0", "attr7":"0", "attr8":"0", "attr9":"0", "attr10":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "dictName":"SAMPLE_TEXT", "dictCode":"SAMPLE_TEXT", "startTime":"2020-01-01T00:00:00.000Z", "endTime":"2020-01-01T00:00:00.000Z", "seqNo":"0", "attr1":"SAMPLE_TEXT", "attr2":"SAMPLE_TEXT", "attr3":"SAMPLE_TEXT", "attr4":"SAMPLE_TEXT", "attr5":"SAMPLE_TEXT", "attr6":"0", "attr7":"0", "attr8":"0", "attr9":"0", "attr10":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_dictionary_url"))).exitHereIfFailed
             .pause(10)

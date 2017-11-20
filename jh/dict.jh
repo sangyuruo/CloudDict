@@ -12,7 +12,7 @@ startTime Instant,
 /** 结束时间 */
 endTime Instant,
 /** 序号 */
-sort Integer required, 
+seqNo Integer required, 
 /**预留字段*/
 attr1 String maxlength(200),
 attr2 String maxlength(200),
@@ -40,7 +40,7 @@ dictClassifyValue String maxlength(100) required,
 /** 父分类代码 */
 parentClassifyCode Integer,
 /** 序号 */
-sort Integer required,
+seqNo Integer required,
 /** 是否有效 */
 enable Boolean required ,
 /** 备注 */

@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dictionary",
+            "otherEntityName": "dictionary",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "dictCode",
@@ -35,7 +42,7 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "sort",
+            "fieldName": "seqNo",
             "javadoc": "序号",
             "fieldType": "Integer",
             "fieldValidateRules": [
@@ -60,7 +67,7 @@
             "fieldValidateRulesMaxlength": 200
         }
     ],
-    "changelogDate": "20171116010852",
+    "changelogDate": "20171120014201",
     "javadoc": "字典分类表\n@author Capejor",
     "entityTableName": "dictionary_classify",
     "dto": "no",

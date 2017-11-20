@@ -1,7 +1,7 @@
 package com.emcloud.dict.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.emcloud.dict.domain.Dictionaryclassify;
+import com.emcloud.dict.domain.DictionaryClassify;
 import com.emcloud.dict.service.DictionaryclassifyService;
 import com.emcloud.dict.web.rest.errors.BadRequestAlertException;
 import com.emcloud.dict.web.rest.util.HeaderUtil;
@@ -23,12 +23,9 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * REST controller for managing Dictionaryclassify.
+ * REST controller for managing DictionaryClassify.
  */
 @RestController
 @RequestMapping("/api")
@@ -53,12 +50,12 @@ public class DictionaryclassifyResource {
      */
     @PostMapping("/dictionaryclassifies")
     @Timed
-    public ResponseEntity<Dictionaryclassify> createDictionaryclassify(@Valid @RequestBody Dictionaryclassify dictionaryclassify) throws URISyntaxException {
-        log.debug("REST request to save Dictionaryclassify : {}", dictionaryclassify);
+    public ResponseEntity<DictionaryClassify> createDictionaryclassify(@Valid @RequestBody DictionaryClassify dictionaryclassify) throws URISyntaxException {
+        log.debug("REST request to save DictionaryClassify : {}", dictionaryclassify);
         if (dictionaryclassify.getId() != null) {
             throw new BadRequestAlertException("A new dictionaryclassify cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Dictionaryclassify result = dictionaryclassifyService.save(dictionaryclassify);
+        DictionaryClassify result = dictionaryclassifyService.save(dictionaryclassify);
         return ResponseEntity.created(new URI("/api/dictionaryclassifies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,12 +72,12 @@ public class DictionaryclassifyResource {
      */
     @PutMapping("/dictionaryclassifies")
     @Timed
-    public ResponseEntity<Dictionaryclassify> updateDictionaryclassify(@Valid @RequestBody Dictionaryclassify dictionaryclassify) throws URISyntaxException {
-        log.debug("REST request to update Dictionaryclassify : {}", dictionaryclassify);
+    public ResponseEntity<DictionaryClassify> updateDictionaryclassify(@Valid @RequestBody DictionaryClassify dictionaryclassify) throws URISyntaxException {
+        log.debug("REST request to update DictionaryClassify : {}", dictionaryclassify);
         if (dictionaryclassify.getId() == null) {
             return createDictionaryclassify(dictionaryclassify);
         }
-        Dictionaryclassify result = dictionaryclassifyService.save(dictionaryclassify);
+        DictionaryClassify result = dictionaryclassifyService.save(dictionaryclassify);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, dictionaryclassify.getId().toString()))
             .body(result);
@@ -94,9 +91,9 @@ public class DictionaryclassifyResource {
      */
     @GetMapping("/dictionaryclassifies")
     @Timed
-    public ResponseEntity<List<Dictionaryclassify>> getAllDictionaryclassifies(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<DictionaryClassify>> getAllDictionaryclassifies(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Dictionaryclassifies");
-        Page<Dictionaryclassify> page = dictionaryclassifyService.findAll(pageable);
+        Page<DictionaryClassify> page = dictionaryclassifyService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dictionaryclassifies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +106,9 @@ public class DictionaryclassifyResource {
      */
     @GetMapping("/dictionaryclassifies/{id}")
     @Timed
-    public ResponseEntity<Dictionaryclassify> getDictionaryclassify(@PathVariable Long id) {
-        log.debug("REST request to get Dictionaryclassify : {}", id);
-        Dictionaryclassify dictionaryclassify = dictionaryclassifyService.findOne(id);
+    public ResponseEntity<DictionaryClassify> getDictionaryclassify(@PathVariable Long id) {
+        log.debug("REST request to get DictionaryClassify : {}", id);
+        DictionaryClassify dictionaryclassify = dictionaryclassifyService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dictionaryclassify));
     }
 
@@ -124,7 +121,7 @@ public class DictionaryclassifyResource {
     @DeleteMapping("/dictionaryclassifies/{id}")
     @Timed
     public ResponseEntity<Void> deleteDictionaryclassify(@PathVariable Long id) {
-        log.debug("REST request to delete Dictionaryclassify : {}", id);
+        log.debug("REST request to delete DictionaryClassify : {}", id);
         dictionaryclassifyService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
@@ -139,9 +136,9 @@ public class DictionaryclassifyResource {
      */
     @GetMapping("/_search/dictionaryclassifies")
     @Timed
-    public ResponseEntity<List<Dictionaryclassify>> searchDictionaryclassifies(@RequestParam String query, @ApiParam Pageable pageable) {
+    public ResponseEntity<List<DictionaryClassify>> searchDictionaryclassifies(@RequestParam String query, @ApiParam Pageable pageable) {
         log.debug("REST request to search for a page of Dictionaryclassifies for query {}", query);
-        Page<Dictionaryclassify> page = dictionaryclassifyService.search(query, pageable);
+        Page<DictionaryClassify> page = dictionaryclassifyService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/dictionaryclassifies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

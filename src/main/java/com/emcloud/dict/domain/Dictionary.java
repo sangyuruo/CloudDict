@@ -1,5 +1,6 @@
 package com.emcloud.dict.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -10,6 +11,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -66,8 +69,8 @@ public class Dictionary implements Serializable {
      */
     @NotNull
     @ApiModelProperty(value = "序号", required = true)
-    @Column(name = "jhi_sort", nullable = false)
-    private Integer sort;
+    @Column(name = "seq_no", nullable = false)
+    private Integer seqNo;
 
     /**
      * 预留字段
@@ -107,6 +110,11 @@ public class Dictionary implements Serializable {
 
     @Column(name = "attr_10")
     private Integer attr10;
+
+    @OneToMany(mappedBy = "dictionary")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<DictionaryClassify> dictionaryClassifies = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -169,17 +177,17 @@ public class Dictionary implements Serializable {
         this.endTime = endTime;
     }
 
-    public Integer getSort() {
-        return sort;
+    public Integer getSeqNo() {
+        return seqNo;
     }
 
-    public Dictionary sort(Integer sort) {
-        this.sort = sort;
+    public Dictionary seqNo(Integer seqNo) {
+        this.seqNo = seqNo;
         return this;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setSeqNo(Integer seqNo) {
+        this.seqNo = seqNo;
     }
 
     public String getAttr1() {
@@ -311,6 +319,31 @@ public class Dictionary implements Serializable {
     public void setAttr10(Integer attr10) {
         this.attr10 = attr10;
     }
+
+    public Set<DictionaryClassify> getDictionaryClassifies() {
+        return dictionaryClassifies;
+    }
+
+    public Dictionary dictionaryClassifies(Set<DictionaryClassify> dictionaryClassifies) {
+        this.dictionaryClassifies = dictionaryClassifies;
+        return this;
+    }
+
+    public Dictionary addDictionaryClassify(DictionaryClassify DictionaryClassify) {
+        this.dictionaryClassifies.add(DictionaryClassify);
+        DictionaryClassify.setDictionary(this);
+        return this;
+    }
+
+    public Dictionary removeDictionaryClassify(DictionaryClassify DictionaryClassify) {
+        this.dictionaryClassifies.remove(DictionaryClassify);
+        DictionaryClassify.setDictionary(null);
+        return this;
+    }
+
+    public void setDictionaryClassifies(Set<DictionaryClassify> dictionaryClassifies) {
+        this.dictionaryClassifies = dictionaryClassifies;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -341,7 +374,7 @@ public class Dictionary implements Serializable {
             ", dictCode='" + getDictCode() + "'" +
             ", startTime='" + getStartTime() + "'" +
             ", endTime='" + getEndTime() + "'" +
-            ", sort='" + getSort() + "'" +
+            ", seqNo='" + getSeqNo() + "'" +
             ", attr1='" + getAttr1() + "'" +
             ", attr2='" + getAttr2() + "'" +
             ", attr3='" + getAttr3() + "'" +

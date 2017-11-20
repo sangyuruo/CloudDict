@@ -1,11 +1,11 @@
 package com.emcloud.dict.service;
 
-import com.emcloud.dict.domain.Dictionaryclassify;
+import com.emcloud.dict.domain.DictionaryClassify;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing Dictionaryclassify.
+ * Service Interface for managing DictionaryClassify.
  */
 public interface DictionaryclassifyService {
 
@@ -15,7 +15,7 @@ public interface DictionaryclassifyService {
      * @param dictionaryclassify the entity to save
      * @return the persisted entity
      */
-    Dictionaryclassify save(Dictionaryclassify dictionaryclassify);
+    DictionaryClassify save(DictionaryClassify dictionaryclassify);
 
     /**
      *  Get all the dictionaryclassifies.
@@ -23,7 +23,7 @@ public interface DictionaryclassifyService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Dictionaryclassify> findAll(Pageable pageable);
+    Page<DictionaryClassify> findAll(Pageable pageable);
 
     /**
      *  Get the "id" dictionaryclassify.
@@ -31,7 +31,7 @@ public interface DictionaryclassifyService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    Dictionaryclassify findOne(Long id);
+    DictionaryClassify findOne(Long id);
 
     /**
      *  Delete the "id" dictionaryclassify.
@@ -44,9 +44,9 @@ public interface DictionaryclassifyService {
      * Search for the dictionaryclassify corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Dictionaryclassify> search(String query, Pageable pageable);
+    Page<DictionaryClassify> search(String query, Pageable pageable);
 }

@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "dictionaryClassify",
+            "otherEntityName": "dictionaryClassify",
+            "otherEntityRelationshipName": "dictionary"
+        }
+    ],
     "fields": [
         {
             "fieldName": "dictName",
@@ -33,7 +40,7 @@
             "fieldType": "Instant"
         },
         {
-            "fieldName": "sort",
+            "fieldName": "seqNo",
             "javadoc": "序号",
             "fieldType": "Integer",
             "fieldValidateRules": [
@@ -102,7 +109,7 @@
             "fieldType": "Integer"
         }
     ],
-    "changelogDate": "20171116010851",
+    "changelogDate": "20171120014200",
     "javadoc": "字典表\n@author Capejor",
     "entityTableName": "dictionary",
     "dto": "no",
