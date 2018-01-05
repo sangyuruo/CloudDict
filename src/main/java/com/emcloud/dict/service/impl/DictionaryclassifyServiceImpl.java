@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -59,6 +61,18 @@ public class DictionaryclassifyServiceImpl implements DictionaryclassifyService{
         return dictionaryclassifyRepository.findAll(pageable);
     }
 
+    /**
+     *  Get all the dictionaryclassifies.
+     *
+     *  @param dictCode the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<DictionaryClassify> findByDictCode(String dictCode){
+        log.debug("Request to get all DictionaryClassify by comPointCode");
+        return dictionaryclassifyRepository.findByDictCode(dictCode);
+    }
     /**
      *  Get one dictionaryclassify by id.
      *

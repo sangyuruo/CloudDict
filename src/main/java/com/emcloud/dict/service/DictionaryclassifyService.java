@@ -4,6 +4,8 @@ import com.emcloud.dict.domain.DictionaryClassify;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing DictionaryClassify.
  */
@@ -32,6 +34,14 @@ public interface DictionaryclassifyService {
      *  @return the entity
      */
     DictionaryClassify findOne(Long id);
+
+    /**
+     *  Get all the DictionaryClassifys.
+     *
+     *  @param dictCode the pagination information
+     *  @return the list of entities
+     */
+    List<DictionaryClassify> findByDictCode(String dictCode);
 
     /**
      *  Delete the "id" dictionaryclassify.

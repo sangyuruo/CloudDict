@@ -99,6 +99,20 @@ public class DictionaryclassifyResource {
     }
 
     /**
+     * GET  /dictionaryclassifies : get all the dictionaryclassifies.
+     *
+     * @param dictCode the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of dictionaryclassifies in body
+     */
+    @GetMapping("/dictionaryclassifies/by-dict-code")
+    @Timed
+    public List<DictionaryClassify> getAllByDictCode
+    (@RequestParam(value = "dictCode") String dictCode ) {
+        log.debug("REST dictCode to get a page of DictionaryClassify");
+        List<DictionaryClassify> list = dictionaryclassifyService.findByDictCode(dictCode);
+        return list;
+    }
+    /**
      * GET  /dictionaryclassifies/:id : get the "id" dictionaryclassify.
      *
      * @param id the id of the dictionaryclassify to retrieve
