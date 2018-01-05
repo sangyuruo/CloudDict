@@ -110,7 +110,7 @@ public class DictionaryclassifyResourceIntTest {
             .dictCode(DEFAULT_DICT_CODE)
             .dictClassifyCode(DEFAULT_DICT_CLASSIFY_CODE)
             .dictClassifyValue(DEFAULT_DICT_CLASSIFY_VALUE)
-            .parentClassifyCode(DEFAULT_PARENT_CLASSIFY_CODE)
+            .parentId(DEFAULT_PARENT_CLASSIFY_CODE)
             .seqNo(DEFAULT_SEQ_NO)
             .enable(DEFAULT_ENABLE)
             .remark(DEFAULT_REMARK);
@@ -141,7 +141,7 @@ public class DictionaryclassifyResourceIntTest {
         assertThat(testDictionaryclassify.getDictCode()).isEqualTo(DEFAULT_DICT_CODE);
         assertThat(testDictionaryclassify.getDictClassifyCode()).isEqualTo(DEFAULT_DICT_CLASSIFY_CODE);
         assertThat(testDictionaryclassify.getDictClassifyValue()).isEqualTo(DEFAULT_DICT_CLASSIFY_VALUE);
-        assertThat(testDictionaryclassify.getParentClassifyCode()).isEqualTo(DEFAULT_PARENT_CLASSIFY_CODE);
+        assertThat(testDictionaryclassify.getParentId()).isEqualTo(DEFAULT_PARENT_CLASSIFY_CODE);
         assertThat(testDictionaryclassify.getSeqNo()).isEqualTo(DEFAULT_SEQ_NO);
         assertThat(testDictionaryclassify.isEnable()).isEqualTo(DEFAULT_ENABLE);
         assertThat(testDictionaryclassify.getRemark()).isEqualTo(DEFAULT_REMARK);
@@ -256,7 +256,7 @@ public class DictionaryclassifyResourceIntTest {
             .andExpect(jsonPath("$.[*].dictCode").value(hasItem(DEFAULT_DICT_CODE.toString())))
             .andExpect(jsonPath("$.[*].dictClassifyCode").value(hasItem(DEFAULT_DICT_CLASSIFY_CODE)))
             .andExpect(jsonPath("$.[*].dictClassifyValue").value(hasItem(DEFAULT_DICT_CLASSIFY_VALUE.toString())))
-            .andExpect(jsonPath("$.[*].parentClassifyCode").value(hasItem(DEFAULT_PARENT_CLASSIFY_CODE)))
+            .andExpect(jsonPath("$.[*].parentId").value(hasItem(DEFAULT_PARENT_CLASSIFY_CODE)))
             .andExpect(jsonPath("$.[*].seqNo").value(hasItem(DEFAULT_SEQ_NO)))
             .andExpect(jsonPath("$.[*].enable").value(hasItem(DEFAULT_ENABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));
@@ -276,7 +276,7 @@ public class DictionaryclassifyResourceIntTest {
             .andExpect(jsonPath("$.dictCode").value(DEFAULT_DICT_CODE.toString()))
             .andExpect(jsonPath("$.dictClassifyCode").value(DEFAULT_DICT_CLASSIFY_CODE))
             .andExpect(jsonPath("$.dictClassifyValue").value(DEFAULT_DICT_CLASSIFY_VALUE.toString()))
-            .andExpect(jsonPath("$.parentClassifyCode").value(DEFAULT_PARENT_CLASSIFY_CODE))
+            .andExpect(jsonPath("$.parentId").value(DEFAULT_PARENT_CLASSIFY_CODE))
             .andExpect(jsonPath("$.seqNo").value(DEFAULT_SEQ_NO))
             .andExpect(jsonPath("$.enable").value(DEFAULT_ENABLE.booleanValue()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK.toString()));
@@ -304,7 +304,7 @@ public class DictionaryclassifyResourceIntTest {
             .dictCode(UPDATED_DICT_CODE)
             .dictClassifyCode(UPDATED_DICT_CLASSIFY_CODE)
             .dictClassifyValue(UPDATED_DICT_CLASSIFY_VALUE)
-            .parentClassifyCode(UPDATED_PARENT_CLASSIFY_CODE)
+            .parentId(UPDATED_PARENT_CLASSIFY_CODE)
             .seqNo(UPDATED_SEQ_NO)
             .enable(UPDATED_ENABLE)
             .remark(UPDATED_REMARK);
@@ -321,7 +321,7 @@ public class DictionaryclassifyResourceIntTest {
         assertThat(testDictionaryclassify.getDictCode()).isEqualTo(UPDATED_DICT_CODE);
         assertThat(testDictionaryclassify.getDictClassifyCode()).isEqualTo(UPDATED_DICT_CLASSIFY_CODE);
         assertThat(testDictionaryclassify.getDictClassifyValue()).isEqualTo(UPDATED_DICT_CLASSIFY_VALUE);
-        assertThat(testDictionaryclassify.getParentClassifyCode()).isEqualTo(UPDATED_PARENT_CLASSIFY_CODE);
+        assertThat(testDictionaryclassify.getParentId()).isEqualTo(UPDATED_PARENT_CLASSIFY_CODE);
         assertThat(testDictionaryclassify.getSeqNo()).isEqualTo(UPDATED_SEQ_NO);
         assertThat(testDictionaryclassify.isEnable()).isEqualTo(UPDATED_ENABLE);
         assertThat(testDictionaryclassify.getRemark()).isEqualTo(UPDATED_REMARK);
@@ -385,7 +385,7 @@ public class DictionaryclassifyResourceIntTest {
             .andExpect(jsonPath("$.[*].dictCode").value(hasItem(DEFAULT_DICT_CODE.toString())))
             .andExpect(jsonPath("$.[*].dictClassifyCode").value(hasItem(DEFAULT_DICT_CLASSIFY_CODE)))
             .andExpect(jsonPath("$.[*].dictClassifyValue").value(hasItem(DEFAULT_DICT_CLASSIFY_VALUE.toString())))
-            .andExpect(jsonPath("$.[*].parentClassifyCode").value(hasItem(DEFAULT_PARENT_CLASSIFY_CODE)))
+            .andExpect(jsonPath("$.[*].parentId").value(hasItem(DEFAULT_PARENT_CLASSIFY_CODE)))
             .andExpect(jsonPath("$.[*].seqNo").value(hasItem(DEFAULT_SEQ_NO)))
             .andExpect(jsonPath("$.[*].enable").value(hasItem(DEFAULT_ENABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK.toString())));

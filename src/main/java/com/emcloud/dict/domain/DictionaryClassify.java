@@ -58,7 +58,7 @@ public class DictionaryClassify implements Serializable {
      */
     @ApiModelProperty(value = "父分类代码")
     @Column(name = "parent_classify_code")
-    private Integer parentClassifyCode;
+    private Integer parentId;
 
     /**
      * 序号
@@ -135,17 +135,17 @@ public class DictionaryClassify implements Serializable {
         this.dictClassifyValue = dictClassifyValue;
     }
 
-    public Integer getParentClassifyCode() {
-        return parentClassifyCode;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public DictionaryClassify parentClassifyCode(Integer parentClassifyCode) {
-        this.parentClassifyCode = parentClassifyCode;
+    public DictionaryClassify parentId(Integer parentId) {
+        this.parentId = parentId;
         return this;
     }
 
-    public void setParentClassifyCode(Integer parentClassifyCode) {
-        this.parentClassifyCode = parentClassifyCode;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public Integer getSeqNo() {
@@ -228,7 +228,7 @@ public class DictionaryClassify implements Serializable {
             ", dictCode='" + getDictCode() + "'" +
             ", dictClassifyCode='" + getDictClassifyCode() + "'" +
             ", dictClassifyValue='" + getDictClassifyValue() + "'" +
-            ", parentClassifyCode='" + getParentClassifyCode() + "'" +
+            ", parentId='" + getParentId() + "'" +
             ", seqNo='" + getSeqNo() + "'" +
             ", enable='" + isEnable() + "'" +
             ", remark='" + getRemark() + "'" +

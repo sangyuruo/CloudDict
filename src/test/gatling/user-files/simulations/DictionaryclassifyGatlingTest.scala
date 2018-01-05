@@ -80,7 +80,7 @@ class DictionaryclassifyGatlingTest extends Simulation {
             .exec(http("Create new dictionaryclassify")
             .post("/emclouddict/api/dictionaryclassifies")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "dictCode":"SAMPLE_TEXT", "dictClassifyCode":"0", "dictClassifyValue":"SAMPLE_TEXT", "parentClassifyCode":"0", "seqNo":"0", "enable":null, "remark":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "dictCode":"SAMPLE_TEXT", "dictClassifyCode":"0", "dictClassifyValue":"SAMPLE_TEXT", "parentId":"0", "seqNo":"0", "enable":null, "remark":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_dictionaryclassify_url"))).exitHereIfFailed
             .pause(10)
