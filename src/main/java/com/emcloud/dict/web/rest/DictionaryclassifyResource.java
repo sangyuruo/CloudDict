@@ -89,12 +89,12 @@ public class DictionaryclassifyResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of dictionaryclassifies in body
      */
-    @GetMapping("/dictionaryclassifies")
+    @GetMapping("/dictionary-classifies")
     @Timed
     public ResponseEntity<List<DictionaryClassify>> getAllDictionaryclassifies(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Dictionaryclassifies");
         Page<DictionaryClassify> page = dictionaryclassifyService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dictionaryclassifies");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dictionary-classifies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
