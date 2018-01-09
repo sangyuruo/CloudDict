@@ -48,29 +48,29 @@ public class DictionaryclassifyResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new dictionaryclassify, or with status 400 (Bad Request) if the dictionaryclassify has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/dictionaryclassifies")
+    @PostMapping("/dictionary-classifies")
     @Timed
     public ResponseEntity<DictionaryClassify> createDictionaryclassify(@Valid @RequestBody DictionaryClassify dictionaryclassify) throws URISyntaxException {
         log.debug("REST request to save DictionaryClassify : {}", dictionaryclassify);
         if (dictionaryclassify.getId() != null) {
-            throw new BadRequestAlertException("A new dictionaryclassify cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new dictionary-classify cannot already have an ID", ENTITY_NAME, "idexists");
         }
         DictionaryClassify result = dictionaryclassifyService.save(dictionaryclassify);
-        return ResponseEntity.created(new URI("/api/dictionaryclassifies/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/dictionary-classifies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /dictionaryclassifies : Updates an existing dictionaryclassify.
+     * PUT  /dictionary-classifies : Updates an existing dictionary-classify.
      *
-     * @param dictionaryclassify the dictionaryclassify to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated dictionaryclassify,
-     * or with status 400 (Bad Request) if the dictionaryclassify is not valid,
-     * or with status 500 (Internal Server Error) if the dictionaryclassify couldn't be updated
+     * @param dictionaryclassify the dictionary-classify to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated dictionary-classify,
+     * or with status 400 (Bad Request) if the dictionary-classify is not valid,
+     * or with status 500 (Internal Server Error) if the dictionary-classify couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/dictionaryclassifies")
+    @PutMapping("/dictionary-classifies")
     @Timed
     public ResponseEntity<DictionaryClassify> updateDictionaryclassify(@Valid @RequestBody DictionaryClassify dictionaryclassify) throws URISyntaxException {
         log.debug("REST request to update DictionaryClassify : {}", dictionaryclassify);
@@ -84,10 +84,10 @@ public class DictionaryclassifyResource {
     }
 
     /**
-     * GET  /dictionaryclassifies : get all the dictionaryclassifies.
+     * GET  /dictionary-classifies : get all the dictionary-classifies.
      *
      * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of dictionaryclassifies in body
+     * @return the ResponseEntity with status 200 (OK) and the list of dictionary-classifies in body
      */
     @GetMapping("/dictionary-classifies")
     @Timed
@@ -99,12 +99,12 @@ public class DictionaryclassifyResource {
     }
 
     /**
-     * GET  /dictionaryclassifies : get all the dictionaryclassifies.
+     * GET  /dictionary-classifies : get all the dictionary-classifies.
      *
      * @param dictCode the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of dictionaryclassifies in body
+     * @return the ResponseEntity with status 200 (OK) and the list of dictionary-classifies in body
      */
-    @GetMapping("/dictionaryclassifies/by-dict-code")
+    @GetMapping("/dictionary-classifies/by-dict-code")
     @Timed
     public List<DictionaryClassify> getAllByDictCode
     (@RequestParam(value = "dictCode") String dictCode ) {
@@ -113,12 +113,12 @@ public class DictionaryclassifyResource {
         return list;
     }
     /**
-     * GET  /dictionaryclassifies/:id : get the "id" dictionaryclassify.
+     * GET  /dictionary-classifies/:id : get the "id" dictionary-classify.
      *
-     * @param id the id of the dictionaryclassify to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the dictionaryclassify, or with status 404 (Not Found)
+     * @param id the id of the dictionary-classify to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the dictionary-classify, or with status 404 (Not Found)
      */
-    @GetMapping("/dictionaryclassifies/{id}")
+    @GetMapping("/dictionary-classifies/{id}")
     @Timed
     public ResponseEntity<DictionaryClassify> getDictionaryclassify(@PathVariable Long id) {
         log.debug("REST request to get DictionaryClassify : {}", id);
@@ -127,12 +127,12 @@ public class DictionaryclassifyResource {
     }
 
     /**
-     * DELETE  /dictionaryclassifies/:id : delete the "id" dictionaryclassify.
+     * DELETE  /dictionary-classifies/:id : delete the "id" dictionary-classify.
      *
-     * @param id the id of the dictionaryclassify to delete
+     * @param id the id of the dictionary-classify to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/dictionaryclassifies/{id}")
+    @DeleteMapping("/dictionary-classifies/{id}")
     @Timed
     public ResponseEntity<Void> deleteDictionaryclassify(@PathVariable Long id) {
         log.debug("REST request to delete DictionaryClassify : {}", id);
@@ -148,12 +148,12 @@ public class DictionaryclassifyResource {
      * @param pageable the pagination information
      * @return the result of the search
      */
-    @GetMapping("/_search/dictionaryclassifies")
+    @GetMapping("/_search/dictionary-classifies")
     @Timed
     public ResponseEntity<List<DictionaryClassify>> searchDictionaryclassifies(@RequestParam String query, @ApiParam Pageable pageable) {
-        log.debug("REST request to search for a page of Dictionaryclassifies for query {}", query);
+        log.debug("REST request to search for a page of Dictionary-classifies for query {}", query);
         Page<DictionaryClassify> page = dictionaryclassifyService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/dictionaryclassifies");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/dictionary-classifies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
