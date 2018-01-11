@@ -70,8 +70,20 @@ public class DictionaryclassifyServiceImpl implements DictionaryclassifyService{
     @Override
     @Transactional(readOnly = true)
     public List<DictionaryClassify> findByDictCode(String dictCode){
-        log.debug("Request to get all DictionaryClassify by comPointCode");
+        log.debug("Request to get all DictionaryClassify by dictCode");
         return dictionaryclassifyRepository.findByDictCode(dictCode);
+    }
+    /**
+     *  Get all the dictionaryclassifies.
+     *
+     *  @param dictClassifyValue the pagination information
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<DictionaryClassify> findByDictClassifyValue(String dictClassifyValue){
+        log.debug("Request to get all DictionaryClassify by dictClassifyValue");
+        return dictionaryclassifyRepository.findByDictClassifyValue(dictClassifyValue);
     }
     /**
      *  Get one dictionaryclassify by id.

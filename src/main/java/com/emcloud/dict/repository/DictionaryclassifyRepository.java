@@ -15,4 +15,5 @@ import java.util.List;
 @Repository
 public interface DictionaryclassifyRepository extends JpaRepository<DictionaryClassify, Long> {
     List<DictionaryClassify> findByDictCode(String dictCode);
+    List<DictionaryClassify> findByDictClassifyValue(String dictClassifyValue);
 }

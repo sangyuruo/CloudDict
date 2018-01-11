@@ -112,6 +112,22 @@ public class DictionaryclassifyResource {
         List<DictionaryClassify> list = dictionaryclassifyService.findByDictCode(dictCode);
         return list;
     }
+
+    /**
+     * GET  /dictionary-classifies : get all the dictionary-classifies.
+     *
+     * @param dictClassifyValue the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of dictionary-classifies in body
+     */
+    @GetMapping("/dictionary-classifies/by-dict-classify-value")
+    @Timed
+    public List<DictionaryClassify> getAllByDictClassifyValue
+    (@RequestParam(value = "dictClassifyValue") String dictClassifyValue ) {
+        log.debug("REST dictClassifyValue to get a page of DictionaryClassify");
+        List<DictionaryClassify> list = dictionaryclassifyService.findByDictClassifyValue(dictClassifyValue);
+        return list;
+    }
+
     /**
      * GET  /dictionary-classifies/:id : get the "id" dictionary-classify.
      *

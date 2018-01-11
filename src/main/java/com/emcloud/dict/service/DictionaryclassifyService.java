@@ -44,6 +44,14 @@ public interface DictionaryclassifyService {
     List<DictionaryClassify> findByDictCode(String dictCode);
 
     /**
+     *  Get all the DictionaryClassifys.
+     *
+     *  @param dictClassifyValue the pagination information
+     *  @return the list of entities
+     */
+    List<DictionaryClassify> findByDictClassifyValue(String dictClassifyValue);
+
+    /**
      *  Delete the "id" dictionaryclassify.
      *
      *  @param id the id of the entity
